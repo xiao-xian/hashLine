@@ -43,7 +43,7 @@ void MainWindow::handleButton()
     {
         Node* node = nodes[ n ];
 
-        if( n < 10 ){
+        if( n < 40 ){
             int x = 30 * ( n + 1 );
             node->setPos( x, 600 - int( ratio* double( x ) ) );
         }

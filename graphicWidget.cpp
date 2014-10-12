@@ -119,10 +119,9 @@ std::vector< Node* >& GraphWidget::getNodes()
 
 void GraphWidget::hashLine()
 {
-    std::vector< QPoint > points;
+    std::vector< QPoint > points(  m_nodes.size() );
     for( int n = 0, num = m_nodes.size(); n < num; ++n ){
-        QPoint p = QPoint( m_nodes[ n ]->pos().x(), m_nodes[ n ]->pos().y());
-        points.push_back( p );
+        points[ n ] =  QPoint( m_nodes[ n ]->pos().x(), m_nodes[ n ]->pos().y());
     }
 
     timeval timer;
@@ -130,5 +129,5 @@ void GraphWidget::hashLine()
     Line myLine = find_line_with_most_points(  points );
     std::cout<<" hashing "<< m_numNodes*(m_numNodes -1 )<<" lines takes "<<stopHashTimer(timer )<<" seconds "<<std::endl;
     m_start.setX( 50 ); m_start.setY( myLine.y( 50 ) );
-    m_end.setX( 300 );  m_end.setY( myLine.y( 300 ) );
+    m_end.setX( 600 );  m_end.setY( myLine.y( 600 ) );
 }

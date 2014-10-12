@@ -19,7 +19,6 @@ struct HashPoint{
 
 int GCD( const int a, const int b ){
     int gcd = 1;
-
     for( int i = 2; i <= a && i <= b; i++ ){
         if( ( a%i==0 ) && ( b%i==0 ) ){
             gcd = i;
@@ -28,9 +27,19 @@ int GCD( const int a, const int b ){
     return gcd;
 }
 
+int GCD2( const int a, const int b ){
+    int min_ab = ( a < b ? a : b );
+    for( int i = min_ab; i >= 2; i-- ){
+        if( ( a%i == 0 ) && ( b%i == 0 ) ) {
+            return i;
+        }
+    }
+    return 1;
+}
+
 std::pair<int, int> get_canonical_fractional( int a, int b ){
 
-    int gcd = GCD( abs(a), abs(b) );
+    int gcd = GCD2( abs(a), abs(b) );
     a /= gcd;
     b /= gcd;
 
@@ -69,6 +78,7 @@ struct HashLine {
 Line find_line_with_most_points( const vector< QPoint >& pts ){
 
     unordered_map< Line, unordered_set< QPoint, HashPoint>, HashLine > table;
+    table.reserve( pts.size() * ( pts.size() - 1 ) );
     for( int i = 0, num = pts.size(); i < num; ++i ){
         for( int j = i+1; j < num; ++j ){
             Line l( pts[i], pts[j]);
